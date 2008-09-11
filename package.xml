@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.6" version="2.0"
+	xmlns="http://pear.php.net/dtd/package-2.0"
+	xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+	<name>sfAdvancedLoggerPlugin</name>
+	<channel>plugins.symfony-project.org</channel>
+	<summary>Advanced logger for symfony</summary>
+	<description>
+		sfAdvancedLogger allow advanced loggind functionality like PHP
+		errors logging, email alerts and conditional logging
+	</description>
+	<lead>
+		<name>Romain Cambien</name>
+		<user>romain</user>
+		<email>romain@cambien.net</email>
+		<active>yes</active>
+	</lead>
+	<date>2008-09-11</date>
+	<time>16:28:05</time>
+	<version>
+		<release>0.2.0</release>
+		<api>0.2.0</api>
+	</version>
+	<stability>
+		<release>beta</release>
+		<api>beta</api>
+	</stability>
+	<license uri="http://www.symfony-project.com/license">
+		MIT license
+	</license>
+	<notes>-</notes>
+	<contents>
+		<dir name="/">
+			<dir name="lib">
+				<file role="data" name="sfAdvancedLogger.class.php" />
+				<file role="data" name="sfAdvancedLoggerDB.class.php" />
+				<file role="data" name="sfAdvancedLogger.interface.php" />
+				<file role="data"
+					name="sfAdvancedLoggerConditional.class.php" />
+				<file role="data"
+					name="sfAdvancedLoggerEmail.class.php" />
+				<file role="data" name="sfAdvancedLoggerPHP.class.php" />
+			</dir>
+			<file name="README" role="data" />
+			<file name="LICENSE" role="data" />
+		</dir>
+	</contents>
+	<dependencies>
+		<required>
+			<php>
+				<min>5.0.0</min>
+			</php>
+			<pearinstaller>
+				<min>1.4.1</min>
+			</pearinstaller>
+			<package>
+				<name>symfony</name>
+				<channel>pear.symfony-project.com</channel>
+				<min>1.0.0</min>
+				<max>1.2.0</max>
+				<exclude>1.2.0</exclude>
+			</package>
+		</required>
+	</dependencies>
+	<phprelease />
+	<changelog>
+		<release>
+			<version>
+				<release>0.1.0</release>
+				<api>0.1.0</api>
+			</version>
+			<stability>
+				<release>beta</release>
+				<api>beta</api>
+			</stability>
+			<license uri="http://www.symfony-project.com/license">
+				MIT license
+			</license>
+			<date>2007-09-27</date>
+			<license>MIT</license>
+			<notes>* Initial import</notes>
+		</release>
+		<release>
+			<version>
+				<release>0.2.0</release>
+				<api>0.2.0</api>
+			</version>
+			<stability>
+				<release>beta</release>
+				<api>beta</api>
+			</stability>
+			<license uri="http://www.symfony-project.com/license">
+				MIT license
+			</license>
+			<date>2008-09-11</date>
+			<license>MIT</license>
+			<notes>* Adding support for Symfony 1.1</notes>
+		</release>
+	</changelog>
+</package>

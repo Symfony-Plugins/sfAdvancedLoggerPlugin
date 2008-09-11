@@ -1,0 +1,134 @@
+= sfAdvancedLogger plug-in =
+
+The `sfAdvancedLogger` provide advanced logging functionality :
+  * log PHP errors
+  * log uncaught exceptions
+  * conditional logging
+  * email alerts
+
+
+== Installation ==
+
+  * Install the plug-in
+  
+    {{{
+      symfony plugin-install http://plugins.symfony-project.com/sfAdvancedLoggerPlugin
+    }}}
+
+  * Enable the logger in your `logging.yml`
+
+    {{{
+  all:
+    loggers:
+      sf_advanced_logger:
+         class: sfAdvancedLogger
+         param:
+           php_level: 4095 # E_ALL | E_STRIC
+           exception: on # log uncaught exceptions
+           email:
+             - level: 0 # SF_LOG_EMERG
+               to: alertes@domain.net
+               subject: Only emerg errors
+             - min_level: 5 # SF_LOG_NOTICE and up
+               to: dev@domain.net
+               subject: From notice to emerg errors
+             - type: [PHP, Exception] # Only PHP and uncaught exception
+               to: default@domain.net
+               subject: errors on PHP errors and uncaught exceptions
+             - no_type: [PHP] # none of PHP errors
+               to: default@domain.net
+               subject: errors that aren't PHP errors
+             - min_level: 5 # SF_LOG_NOTICE and up
+               type: sfView
+               to:
+                 - dev@domain.net
+                 - graph@domain.net
+               subject: notice to emerg errors raised by sfView
+           file:
+             - level: 0 # SF_LOG_EMERG
+               file: %SF_LOG_DIR%/emerg.log
+             - min_level: 5 # SF_LOG_NOTICE and up
+               file: %SF_LOG_DIR%/notice_and_up.log
+             - type: [PHP, Exception] # Only PHP and uncaught exception
+               file: %SF_LOG_DIR%/php.log
+             - min_level: 5 # SF_LOG_NOTICE and up
+               type: View
+               file: %SF_LOG_DIR%/view.log
+    }}}
+
+  * Clear the cache
+
+    {{{
+      symfony cc
+    }}}
+
+  * You're done.
+
+== Configuration ==
+ 
+'''php_level : ''' The PHP error mask to log. [http://fr3.php.net/manual/en/ref.errorfunc.php#ini.error-reporting Click for more information]
+
+'''exception : ''' Log the uncaught exceptions
+
+'''email : ''' Send errors by email
+
+  * '''level : ''' Only log this level of error [http://www.csh.rit.edu/~jon/projects/pear/Log/guide.html#log-levels Click for more information]
+  
+  * '''min_level : ''' Log errors starting at this level
+  
+  * '''type : ''' Log error of this type ( '{TYPE} error message' ). You can use an array for multiple type
+
+  * '''no_type : ''' Don't log error of this type. You can use an array for multiple type
+  
+  * '''to : ''' To Email address. You can use an array
+  
+  * '''from : ''' From email address
+  
+  * '''subject : ''' Email subject
+  
+'''file : ''' Log error on file
+
+  * '''level : ''' See definition from the '''email''' section
+
+  * '''min_level : ''' See definition from the '''email''' section
+
+  * '''type : ''' See definition from the '''email''' section
+
+  * '''no_type : ''' See definition from the '''email''' section
+  
+  * '''file : ''' The file name for the logs
+
+You can combine any options from '''email''' and '''file''' section to match your wishes :
+
+== Exemple ==
+
+To send by email any PHP warnings and log into file other warnings :
+
+	{{{
+  all:
+    loggers:
+      sf_advanced_logger:
+         class: sfAdvancedLogger
+         param:
+           php_level: 2 # E_WARNING
+           email:
+             - level: 4 # SF_LOG_WARNING
+               type: PHP
+               to: alertes@domain.net
+               from: no-reply@domain.net
+               subject: PHP Warning
+           file:
+             - level: 4 # SF_LOG_WARNING
+               no_type: PHP
+               file: %SF_LOG_DIR%/warning.log
+	}}}
+
+== Bugs or features requests ==
+
+Please, submit any bugs or features requests on the [http://www.symfony-project.com/forum/index.php/t/8952/ forum]
+
+== Changelog ==
+
+=== 2007-09-26 | 0.1.0 ===
+
+ * romain: plug-in added to symfony
